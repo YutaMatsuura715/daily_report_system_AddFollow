@@ -18,23 +18,25 @@ import models.Report;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ReportsIndexServlet
+ * Servlet implementation class FollowOnlyReportsIndexServlet
  */
-@WebServlet("/reports/index")
-public class ReportsIndexServlet extends HttpServlet {
+@WebServlet("/FollowOnlyReportsIndexServlet")
+public class FollowOnlyReportsIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportsIndexServlet() {
+    public FollowOnlyReportsIndexServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
         EntityManager em = DBUtil.createEntityManager();
         Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
         int page;
@@ -43,7 +45,8 @@ public class ReportsIndexServlet extends HttpServlet {
         } catch(Exception e) {
             page = 1;
         }
-        List<Report> reports = em.createNamedQuery("getAllReports", Report.class)
+        List<Report> reports = em.createNamedQuery("getFollowedOnlyReports", Report.class)
+                .setParameter("login_employee",login_employee)
                                   .setFirstResult(15 * (page - 1))
                                   .setMaxResults(15)
                                   .getResultList();
@@ -81,8 +84,16 @@ public class ReportsIndexServlet extends HttpServlet {
             request.getSession().removeAttribute("flush");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/followedonlyindex.jsp");
         rd.forward(request, response);
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
     }
 
 }

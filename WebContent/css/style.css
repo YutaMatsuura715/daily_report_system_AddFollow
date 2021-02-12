@@ -161,3 +161,18 @@ pre {
 h3 {
     font-size: larger;
 }
+.btn01 {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #00ffff;
+  border-radius: 8px;
+  color: #brack;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  line-heigt: 1.2em;
+
+}
+.btn01:hover {
+  background: #00bfff
+}
