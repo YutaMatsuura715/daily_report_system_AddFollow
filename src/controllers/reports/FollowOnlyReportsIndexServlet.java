@@ -51,7 +51,8 @@ public class FollowOnlyReportsIndexServlet extends HttpServlet {
                                   .setMaxResults(15)
                                   .getResultList();
 
-        long reports_count = (long)em.createNamedQuery("getReportsCount", Long.class)
+        long reports_count = (long)em.createNamedQuery("getFollowedOnlyReportsCount", Long.class)
+                                     .setParameter("login_employee",login_employee)
                                      .getSingleResult();
 
       //現在ログインしているユーザーのIDをもとにフォローリストテーブルデータを取得

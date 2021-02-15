@@ -36,6 +36,10 @@ import javax.persistence.Table;
         @NamedQuery(
                 name = "getFollowedOnlyReports",
                 query = "SELECT r FROM Report AS r WHERE r.employee IN (SELECT f.FollowerID FROM Follow f WHERE f.FollowedID = :login_employee)"
+        ),
+        @NamedQuery(
+                name = "getFollowedOnlyReportsCount",
+                query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee IN (SELECT f.FollowerID FROM Follow f WHERE f.FollowedID = :login_employee)"
 
             )
 })
